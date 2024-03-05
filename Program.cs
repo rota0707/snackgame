@@ -11,8 +11,8 @@ namespace Wo6
         static void Main(string[] args)
           
         {
-            int maxWith = 50;
-            int maxHeight = 30;
+            int maxWith = 30;
+            int maxHeight = 10;
             Console.Clear();
             // Ve khung
             for (int i = 0; i <= maxWith; i++)
@@ -35,16 +35,39 @@ namespace Wo6
 
             }
             Console.BackgroundColor = ConsoleColor.Black;
+            
+
+
+            // toa dodoj ran
             int x = (maxWith / 2) + 1;
             int y = (maxHeight / 2) + 1;
-            Console.SetCursorPosition(y, x);
+          
+            Console.SetCursorPosition(x, y);
             Console.Write("0");
             int newX = x;
             int newY = y;
+            // toa do diem
+            Random random = new Random();
+
+            int point_x = random.Next(2, maxWith - 2);
+            int point_y = random.Next(2, maxHeight - 2);
+            if(point_x!=newX && point_y != newY) {
+                Console.SetCursorPosition(point_x, point_y);
+                Console.Write("*");
+            }
+            else
+            {
+                point_x = random.Next(2, maxWith - 2);
+                point_y = random.Next(2, maxHeight - 2);
+            }
+            int index = 0;
+           
+
             // phim dichuey
             while (true)
             {
                 Console.SetCursorPosition(newX, newY);
+
                 ConsoleKeyInfo key = Console.ReadKey();
                 Console.Write(" ");
                 switch (key.Key)
@@ -70,7 +93,31 @@ namespace Wo6
                 {
                     break;
                 }
+                // dk vacham
+                if(newX==point_x && newY == point_y)
+                {
+                    index++;
+                 
+                    
+                    point_x = random.Next(2, maxWith - 2);
+                    point_y = random.Next(2, maxHeight - 2);
+                    if (point_x != newX && point_y != newY)
+                    {
+                        Console.SetCursorPosition(point_x, point_y);
+                        Console.Write("*");
+
+                    }
+                    else
+                    {
+                        point_x = random.Next(2, maxWith - 2);
+                        point_y = random.Next(2, maxHeight - 2);
+                    }
+
+                }
+               
+
             }
+
             Console.Clear();
 
             Console.WriteLine("Game Over");
